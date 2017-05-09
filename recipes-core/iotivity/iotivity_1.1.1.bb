@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://resource/include/OCApi.h;beginline=1;endline=19;md5=f
 
 branch_iotivity = "1.1-rel"
 SRCREV = "781570fcd897e2c7fd11c4c76d10723eef35f27a"
-SRC_URI = "git://github.com/iotivity/iotivity.git;destsuffix=${S};branch=${branch_iotivity};protocol=http;"
+SRC_URI = "git://github.com/iotivity/iotivity.git;destsuffix=${S};branch=${branch_iotivity};protocol=http"
 
 url_tinycbor = "git://github.com/01org/tinycbor.git"
 SRCREV_tinycbor = "358a7e42ab1ed421a68e699d8d8359340bcfacbd"
