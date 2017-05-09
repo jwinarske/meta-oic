@@ -27,7 +27,7 @@ Recipes in meta-oic
 
 IoTivity packages built by the meta-oic layer
 =============================================
-—- iotivity-resource : IoTivity resource libraries.
+-- iotivity-resource : IoTivity resource libraries.
 -- iotivity-resource-dev : IoTivity resource header files.
 -- iotivity-resource-thin-staticdev : IoTivity "thin" resource libraries.
 -- iotivity-resource-dbg : IoTivity resource libraries with debug
@@ -51,7 +51,7 @@ applications.
 -- iotivity-tests : IoTivity framework tests.
 -- iotivity-tests-dbg : Debug builds of IoTivity framework tests.
 -- iotivity : Meta-package for all IoTivity runtimes.
-—- iotivity-dev : Meta-package for all IoTivity runtimes and headers.
+-- iotivity-dev : Meta-package for all IoTivity runtimes and headers.
 -- iotivity-sensorboard : IoTivity SensorBoard application. (Sources
 located in iotivity-1.0.0/examples/OICSensorBoard)
 -- iotivity-simple-client: IoTivity resource simpleclient example.  
@@ -90,13 +90,13 @@ binary packages in the OS image.
 
 For eg., to include IoTivity resource and service samples and runtimes, use
 ...
-IMAGE_INSTALL_append += " iotivity-resource-samples iotivity-service-samples”
+IMAGE_INSTALL_append += " iotivity-resource-samples iotivity-service-samples"
 
 To include only IoTivity resource and service runtimes, use
 ...
-IMAGE_INSTALL_append += " iotivity”
+IMAGE_INSTALL_append += " iotivity"
 
-4. After initializing poky, run “bitbake <target>” to build the OS image, 
+4. After initializing poky, run "bitbake <target>" to build the OS image, 
 and further deploy the image to your target.
 
 Building Yocto cross-toolchain with IoTivity for your target
@@ -105,26 +105,26 @@ Yocto has the capability to build cross-toolchains for targets
 to run on 32-bit and 64-bit machines.  
 Follow these steps to construct a toolchain for your target:
 
-1. You should’ve already completed the steps above to build IoTivity for your
+1. You should have already completed the steps above to build IoTivity for your
 target.
 
 2. Modify <poky-build-directory>/conf/local.conf to install the IoTivity
-development packages to the toolchain’s sysroot. 
+development packages to the toolchain's sysroot. 
 ...
-IMAGE_INSTALL_append = " iotivity-dev”
+IMAGE_INSTALL_append = " iotivity-dev"
 
 To include only IoTivity "thin" resource headers and libraries, use
 ...
-IMAGE_INSTALL_append = " iotivity-resource-thin-staticdev”
+IMAGE_INSTALL_append = " iotivity-resource-thin-staticdev"
 
-3. After initializing poky, run “bitbake -c populate_sdk <target>” to build the
+3. After initializing poky, run "bitbake -c populate_sdk <target>" to build the
 target platform SDK and toolchain. You may further install the toolchain
 on your build machine.
 
 Once installed, the toolchain may be used only after initialization. This is
-performed by an “environment setup script” at the root of the toolchain
+performed by an "environment setup script" at the root of the toolchain
 install location (usually in /opt/poky...). 
-To initialize, you must “source” this script into your shell environment. 
+To initialize, you must "source" this script into your shell environment. 
 
 Locations of IoTivity headers, runtimes and samples 
 ===================================================
@@ -149,8 +149,8 @@ Building IoTivity applications for a Yocto target
 
 2. You can now use the Yocto toolchain for your target to cross-compile the
 application. As such, there is no standard procedure for this.  
-You may examine your toolchain’s environment setup script and accordingly
-modify your application’s build script to point to said tools.
+You may examine your toolchain's environment setup script and accordingly
+modify your application's build script to point to said tools.
 
 3. If you further want to package up your application in a Yocto software layer,
 you will have to write a BitBake recipe for it. Look inside
