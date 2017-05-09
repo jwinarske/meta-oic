@@ -285,12 +285,29 @@ do_install() {
 
     #Easy setup app
     make_dir ${IOTIVITY_BIN_DIR_D}/examples/service/easy-setup
+    copy_exec ${S}/out/yocto/${IOTIVITY_TARGET_ARCH}/release/service/easy-setup/sampleapp/enrollee/linux/enrollee ${IOTIVITY_BIN_DIR_D}/examples/service/easy-setup
     copy_exec ${S}/out/yocto/${IOTIVITY_TARGET_ARCH}/release/service/easy-setup/sampleapp/mediator/linux/richsdk_sample/mediator_rich ${IOTIVITY_BIN_DIR_D}/examples/service/easy-setup
 
     #Easy setup tests
     if ${@bb.utils.contains('EXTRA_OESCONS', 'SECURED=1', 'false', 'true', d)}; then
         make_dir ${IOTIVITY_BIN_DIR_D}/tests/service/easy-setup
         copy_exec ${S}/out/yocto/${IOTIVITY_TARGET_ARCH}/release/service/easy-setup/mediator/richsdk/unittests/easysetup_mediator_test ${IOTIVITY_BIN_DIR_D}/tests/service/easy-setup
+    fi
+
+    #Notification
+    copy_file ${S}/out/yocto/${IOTIVITY_TARGET_ARCH}/release/libnotification_consumer.so ${D}${libdir}
+    copy_file ${S}/out/yocto/${IOTIVITY_TARGET_ARCH}/release/libnotification_provider.so ${D}${libdir}
+
+    #Notification app
+    make_dir ${IOTIVITY_BIN_DIR_D}/examples/service/notification
+    copy_exec ${S}/out/yocto/${IOTIVITY_TARGET_ARCH}/release/service/notification/examples/linux/notificationconsumer ${IOTIVITY_BIN_DIR_D}/examples/service/notification
+    copy_exec ${S}/out/yocto/${IOTIVITY_TARGET_ARCH}/release/service/notification/examples/linux/notificationprovider ${IOTIVITY_BIN_DIR_D}/examples/service/notification
+
+    #Notification tests
+    if ${@bb.utils.contains('EXTRA_OESCONS', 'SECURED=1', 'false', 'true', d)}; then
+        make_dir ${IOTIVITY_BIN_DIR_D}/tests/service/notification
+        copy_exec ${S}/out/yocto/${IOTIVITY_TARGET_ARCH}/release/service/notification/unittest/notification_consumer_test ${IOTIVITY_BIN_DIR_D}/tests/service/notification
+        copy_exec ${S}/out/yocto/${IOTIVITY_TARGET_ARCH}/release/service/notification/unittest/notification_provider_test ${IOTIVITY_BIN_DIR_D}/tests/service/notification
     fi
 
     #Scene manager
@@ -317,6 +334,7 @@ do_install() {
     make_dir ${D}${includedir}/iotivity/service/easy-setup/enrollee/
     make_dir ${D}${includedir}/iotivity/service/easy-setup/mediator/csdk/
     make_dir ${D}${includedir}/iotivity/service/easy-setup/mediator/richsdk/
+    make_dir ${D}${includedir}/iotivity/service/notification/
     make_dir ${D}${includedir}/iotivity/service/scene-manager/
 
     #Resource container
@@ -333,7 +351,11 @@ do_install() {
 
     #Easy setup
     copy_file_recursive ${S}/service/easy-setup/inc ${D}${includedir}/iotivity/service/easy-setup
+    copy_file_recursive ${S}/service/easy-setup/enrollee/inc ${D}${includedir}/iotivity/service/easy-setup/enrollee
     copy_file_recursive ${S}/service/easy-setup/mediator/richsdk/inc/ ${D}${includedir}/iotivity/service/easy-setup/mediator/richsdk/
+
+    #Notification
+    copy_file_recursive ${S}/service/notification/include ${D}${includedir}/iotivity/service/notification
 
     #Scene manager
     copy_file_recursive ${S}/service/scene-manager/include ${D}${includedir}/iotivity/service/scene-manager/
@@ -438,6 +460,8 @@ FILES_${PN}-service = "\
         ${libdir}/libHueBundle.so \
         ${libdir}/libESEnrolleeSDK.so \
         ${libdir}/libESMediatorRich.so \
+        ${libdir}/libnotification_consumer.so \
+        ${libdir}/libnotification_provider.so \
         ${libdir}/librcs_client.so \
         ${libdir}/libTestBundle.so"
 
@@ -454,6 +478,7 @@ FILES_${PN}-service-samples-dbg = "\
         ${IOTIVITY_BIN_DIR}/examples/service/resource-container/.debug \
         ${IOTIVITY_BIN_DIR}/examples/service/resource-directory/.debug \
         ${IOTIVITY_BIN_DIR}/examples/service/easy-setup/.debug \
+        ${IOTIVITY_BIN_DIR}/examples/service/notification/.debug \
         ${IOTIVITY_BIN_DIR}/examples/service/scene-manager/.debug"
 
 FILES_${PN}-service-samples = "\
@@ -463,6 +488,7 @@ FILES_${PN}-tests-dbg = "\
         ${libdir}/.debug/libgtest.so \
         ${libdir}/.debug/libgtest_main.so \
         ${IOTIVITY_BIN_DIR}/tests/service/easy-setup/.debug \
+        ${IOTIVITY_BIN_DIR}/tests/service/notification/.debug \
         ${IOTIVITY_BIN_DIR}/tests/resource/.debug \
         ${IOTIVITY_BIN_DIR}/tests/service/resource-container/.debug \
         ${IOTIVITY_BIN_DIR}/tests/service/resource-encapsulation/.debug \
