@@ -1,3 +1,4 @@
+PR = "r1"
 SUMMARY = "IoTivity framework and SDK sponsored by the Open Connectivity Foundation."
 DESCRIPTION = "IoTivity is an open source software framework enabling seamless device-to-device connectivity to address the emerging needs of the Internet of Things."
 HOMEPAGE = "https://www.iotivity.org/"
@@ -12,6 +13,8 @@ branch_iotivity = "1.2-rel"
 SRCREV = "0c90ca6ffcbb6a2c56c977ec11bebb7b1d14053b"
 SRC_URI = "git://github.com/iotivity/iotivity.git;destsuffix=${S};branch=${branch_iotivity};protocol=http"
 SRC_URI += "file://0364-yocto-Use-tools-from-sysroot-before-system-PATH-agai.patch"
+SRC_URI += "file://0189-resource-Include-functional-header-for-g-7.1.0.patch"
+
 
 url_tinycbor = "git://github.com/01org/tinycbor.git"
 SRCREV_tinycbor = "31c7f81d45d115d2007b1c881cbbd3a19618465c"
