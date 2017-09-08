@@ -53,6 +53,7 @@ python () {
 
 IOTIVITY_BIN_DIR = "/opt/${PN}"
 IOTIVITY_BIN_DIR_D = "${D}${IOTIVITY_BIN_DIR}"
+LDFLAGS_append = " -Wl,-rpath-link=\\$$ORIGIN"
 
 do_compile_prepend() {
     export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
